@@ -1,5 +1,6 @@
 package com.oyatrij.springboot3springsecurity6jwtexam.entity;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,5 @@ public class UserEntity {
 
     private String username;
     private String password;
-
     private String role;
 }

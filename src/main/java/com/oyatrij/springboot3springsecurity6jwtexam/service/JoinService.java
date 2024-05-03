@@ -3,27 +3,20 @@ package com.oyatrij.springboot3springsecurity6jwtexam.service;
 import com.oyatrij.springboot3springsecurity6jwtexam.dto.JoinDTO;
 import com.oyatrij.springboot3springsecurity6jwtexam.entity.UserEntity;
 import com.oyatrij.springboot3springsecurity6jwtexam.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class JoinService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    //의존성 주입
-    public JoinService(
-            UserRepository userRepository,
-            BCryptPasswordEncoder bCryptPasswordEncoder
-    ) {
-
-        this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
     public void joinProcess(JoinDTO joinDTO) {
 
-        String username = joinDTO.getUserName();
+        String username = joinDTO.getUsername();
         String password = joinDTO.getPassword();
 
         Boolean isExist = userRepository.existsByUsername(username);
