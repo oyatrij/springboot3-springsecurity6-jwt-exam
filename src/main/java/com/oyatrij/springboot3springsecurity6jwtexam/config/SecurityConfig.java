@@ -1,6 +1,7 @@
 package com.oyatrij.springboot3springsecurity6jwtexam.config;
 
 import com.oyatrij.springboot3springsecurity6jwtexam.jwt.LoginFilter;
+import com.oyatrij.springboot3springsecurity6jwtexam.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ public class SecurityConfig {
 
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JWTUtil jwtUtil;
 
     //사용자 정보 암호화를 위한 Bean등록
     @Bean
@@ -56,7 +58,10 @@ public class SecurityConfig {
                         .anyRequest().authenticated());
 
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(
+                        new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil)
+                        , UsernamePasswordAuthenticationFilter.class
+                );
 
         //JWT를 사용할 것이기 때문에 seesion을 stateless로 설정
         //JWT는 클라이언트에서 상태를 유지
