@@ -1,5 +1,6 @@
 package com.oyatrij.springboot3springsecurity6jwtexam.config;
 
+import com.oyatrij.springboot3springsecurity6jwtexam.jwt.JWTFilter;
 import com.oyatrij.springboot3springsecurity6jwtexam.jwt.LoginFilter;
 import com.oyatrij.springboot3springsecurity6jwtexam.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +69,9 @@ public class SecurityConfig {
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
         return http.build();
     }

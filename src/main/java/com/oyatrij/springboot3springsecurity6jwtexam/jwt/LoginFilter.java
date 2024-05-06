@@ -50,6 +50,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String role = auth.getAuthority();
 
+        //JWT생성
         String token = jwtUtil.createJwt(username, role, 60*60*10L);
 
         //Bearer 뒤 띄어쓰기 필수! RFC 7235 의거

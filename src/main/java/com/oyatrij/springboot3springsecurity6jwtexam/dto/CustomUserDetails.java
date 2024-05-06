@@ -13,7 +13,7 @@ public class CustomUserDetails implements UserDetails {
 
     private final UserEntity userEntity;
 
-    //롤 반환
+    //role 반환
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new ArrayList<>();
